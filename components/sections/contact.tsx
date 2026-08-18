@@ -2,17 +2,52 @@
 
 import { useState } from 'react';
 import { contactContent } from '@/lib/content';
+import { supabase } from '@/lib/supabase';
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    setLoading(true);
+    setError('');
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    const name = formData.get('name') as string;
+    const email = formData.get('email') as string;
+    const company = formData.get('company') as string;
+    const message = formData.get('message') as string;
+
+    const { error } = await supabase.from('contacts').insert([
+      {
+        name,
+        email,
+        company,
+        message,
+      },
+    ]);
+
+    setLoading(false);
+
+    if (error) {
+      console.error('Supabase error:', error);
+      setError('Something went wrong. Please try again.');
+      return;
+    }
+
     setSubmitted(true);
+    form.reset();
   };
 
   return (
-    <section id="contact" className="py-20 md:py-28 bg-[#0a0a0a]"
+    <section
+      id="contact"
+      className="py-20 md:py-28 bg-[#0a0a0a]"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -161,6 +196,7 @@ export default function Contact() {
               <form onSubmit={handleSubmit} className="space-y-5">
 
                 <div className="grid sm:grid-cols-2 gap-5">
+
                   <div>
                     <label className="block text-sm text-gray-400 mb-2">
                       Name
@@ -188,6 +224,7 @@ export default function Contact() {
                       className="w-full px-4 py-3 rounded-xl bg-white/[0.03] border border-white/10 text-white placeholder-gray-600 outline-none focus:border-purple-500/50 transition-colors"
                     />
                   </div>
+
                 </div>
 
                 <div>
@@ -217,11 +254,19 @@ export default function Contact() {
                   />
                 </div>
 
+                {/* Error */}
+                {error && (
+                  <p className="text-red-400 text-sm">
+                    {error}
+                  </p>
+                )}
+
                 <button
                   type="submit"
-                  className="btn-primary w-full py-3.5 rounded-xl text-base font-semibold"
+                  disabled={loading}
+                  className="btn-primary w-full py-3.5 rounded-xl text-base font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {contactContent.form.button}
+                  {loading ? 'Sending...' : contactContent.form.button}
                 </button>
 
               </form>
