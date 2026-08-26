@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import NoticePopup from "@/components/NoticePopup";
 import Hero from '@/components/sections/Hero';
 import TrustLogos from '@/components/sections/TrustLogos';
 import Solutions from '@/components/sections/Solutions';
@@ -20,7 +21,7 @@ export default function Home() {
     <>
       <Navbar />
       <Hero />
-     
+      <NoticePopup/>   
       <TrustLogos />
       <Solutions />
       <EnterpriseJourney />

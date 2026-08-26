@@ -203,6 +203,7 @@ export const navLinks = [
   { label: 'Services', href: '#services' },
   { label: 'Industries', href: '#industries' },
   { label: 'About', href: '#about' },
+  { label: 'Notices', href: '/notices' },
   { label: 'Contact', href: '/contact' },
 ];
 
