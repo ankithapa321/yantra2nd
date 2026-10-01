@@ -1,11 +1,11 @@
-# NexusAI — Next.js Website
+# YantraAI — Next.js Website
 
 This is the original single-page corporate AI site, restructured as a proper Next.js 14 (App Router) + TypeScript + Tailwind CSS project so it can be opened and run directly in VS Code.
 
 ## Project structure
 
 ```
-nexusai-nextjs/
+yantraai-nextjs/
 ├── app/
 │   ├── layout.tsx           # Root layout, loads Inter font via next/font
 │   ├── page.tsx              # Homepage — just composes the sections below
@@ -42,7 +42,7 @@ Each section is a standalone component that pulls its copy from `lib/content.ts`
 
 ## Running it in VS Code
 
-1. Open this folder (`nexusai-nextjs`) in VS Code.
+1. Open this folder (`yantraai-nextjs`) in VS Code.
 2. Open a terminal (``Ctrl+` ``) and install dependencies:
    ```bash
    npm install
