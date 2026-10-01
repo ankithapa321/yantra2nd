@@ -33,6 +33,7 @@ export default function Home() {
       <TechStack />
       <Testimonials />
       <CTA />
+      <Contact />
       <About/>
       <Footer />
     </>

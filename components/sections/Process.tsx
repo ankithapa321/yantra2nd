@@ -13,7 +13,7 @@ export default function Process() {
           <p className="text-gray-400 text-lg">A proven methodology for delivering enterprise-grade AI solutions.</p>
         </Reveal>
 
-        <div className="grid md:grid-cols-5 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-6">
           {processSteps.map((step, i) => (
             <Reveal key={step.num} delay={i * 0.05}>
               <div className="text-center">
